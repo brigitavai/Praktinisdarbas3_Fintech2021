@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.lvNotes = findViewById(R.id.lvNotes);
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         this.notesList = new ArrayList<String>(sp.getStringSet("notes", new HashSet<String>()));
+
         this.listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, notesList);
         this.lvNotes.setAdapter(this.listAdapter);
     }
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.delete_note_activity:
                 return true;
+            case R.id.update_note_activity:
+                Toast.makeText(this, "Update", Toast.LENGTH_LONG).show();
             default:
                 return super.onOptionsItemSelected(item);
         }
