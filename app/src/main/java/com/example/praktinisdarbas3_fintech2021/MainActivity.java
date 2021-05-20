@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //Your adapter loses reference to your list.
-        //https://stackoverflow.com/questions/15422120/notifydatasetchange-not-working-from-custom-adapter
+
         notesList.clear();
         this.notesList.addAll((sp.getStringSet("notes", new HashSet<String>())));
         listAdapter.notifyDataSetChanged();
@@ -61,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(addActivityIntent);
                 return true;
             case R.id.delete_note_activity:
+                Intent deleteActivityIntent = new Intent(getApplicationContext(), com.example.praktinisdarbas3_fintech2021.DeleteNoteActivity.class);
+                startActivity(deleteActivityIntent);
                 return true;
-            case R.id.update_note_activity:
-                Toast.makeText(this, "Update", Toast.LENGTH_LONG).show();
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -17,41 +17,21 @@ import java.util.Set;
 
 public class AddNoteActivity extends AppCompatActivity {
 
-    Spinner spSelectionForDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-
-        spSelectionForDelete = findViewById(R.id.spSelectionForDelete);
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        ArrayList<String>notesList = new ArrayList<String>(sp.getStringSet("notes", new HashSet<String>()));
-
-        ArrayAdapter listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, notesList);
-        spSelectionForDelete.setAdapter(listAdapter);
     }
 
     public void onAddNoteClick(View view) {
         EditText txtNote = findViewById(R.id.txtNote);
 
-        //https://stackoverflow.com/questions/14034803/misbehavior-when-trying-to-store-a-string-set-using-sharedpreferences
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor spEd = sp.edit();
 
         Set<String> savedNotesList = sp.getStringSet("notes", new HashSet<String>());
-
-        String selectedNote = spSelectionForDelete.getSelectedItem().toString();
-
-        for (String savedNote : savedNotesList){
-            if(savedNote.equalsIgnoreCase(selectedNote)){
-                Toast.makeText(this, "Found it! =>" + savedNote, Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(this, savedNote, Toast.LENGTH_SHORT).show();
-            }
-        }
 
         Set<String> newStrSet = new HashSet<String>();
         newStrSet.add(txtNote.getText().toString());

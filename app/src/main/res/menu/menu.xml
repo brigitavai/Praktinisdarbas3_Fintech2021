@@ -4,6 +4,4 @@
         android:title="Add note"/>
     <item android:id="@+id/delete_note_activity"
         android:title="Delete note" />
-    <item android:id="@+id/update_note_activity"
-        android:title="Update note" />
 </menu>
